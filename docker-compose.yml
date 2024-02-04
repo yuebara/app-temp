@@ -1,0 +1,26 @@
+version: "3"
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+      target: development
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+    environment:
+      - NODE_ENV=development
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+  backend:
+    build:
+      context: ./backend
+    ports:
+      - "8080:8080"
+      - "2345:2345"
+    volumes:
+      - ./backend:/app
